@@ -5,8 +5,7 @@ module Jekyll
 
       PARSERS = { 'redcarpet' => RedcarpetParser,
                   'kramdown' => KramdownParser,
-                  'rdiscount' => RDiscountParser,
-                  'maruku' => MarukuParser }
+                  'rdiscount' => RDiscountParser}
 
       def setup
         return if @setup
@@ -15,7 +14,7 @@ module Jekyll
       rescue NameError
         Jekyll.logger.error "Invalid Markdown Processor:", "#{@config['markdown']}"
         Jekyll.logger.error "", "Valid options are [ #{PARSERS.keys.join(" | ")} ]"
-        raise Jekyll::FatalException, "Invalid Markdown Processor: #{@config['markdown']}"
+        raise Jekyll::Errors::FatalException, "Invalid Markdown Processor: #{@config['markdown']}"
       end
 
       private

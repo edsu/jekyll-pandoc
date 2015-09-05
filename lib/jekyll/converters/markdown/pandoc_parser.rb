@@ -1,10 +1,15 @@
 module Jekyll
   module Converters
-    class Markdown
-      class PandocParser
+    class Markdown 
+      class PandocParser < Jekyll::Converter
+	safe true
 
         DEFAULT_EXTENSIONS = []
         DEFAULT_FORMAT = 'html5'
+
+	def matches(ext)
+	  @config['markdown_ext'].include? ext 
+	end
 
         def initialize(config)
           require 'pandoc-ruby'
@@ -12,7 +17,7 @@ module Jekyll
         rescue LoadError
           STDERR.puts 'You are missing a library required for Pandoc. Please run:'
           STDERR.puts ' $ [sudo] gem install pandoc-ruby'
-          raise FatalException, "Missing dependency: pandoc-ruby"
+          raise Jekyll::Errors::FatalException, "Missing dependency: pandoc-ruby"
         end
 
         def convert(content)
@@ -20,7 +25,7 @@ module Jekyll
           format = config_option('format', DEFAULT_FORMAT)
 
           content = PandocRuby.new(content, *extensions).send("to_#{format}")
-          raise FatalException, "Conversion returned empty string" unless content.length > 0
+          raise Jekyll::Errors::FatalException, "Conversion returned empty string" unless content.length > 0
           content
         end
 
