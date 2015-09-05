@@ -3,7 +3,6 @@ require "pandoc-ruby"
 
 describe Jekyll::Converters::Markdown::PandocProcessor do
 
-
   describe "pandoc" do
     config = { "markdown" => "pandoc" }
     config = Jekyll::Configuration::DEFAULTS.merge(config)
