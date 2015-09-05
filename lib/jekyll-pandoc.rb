@@ -16,7 +16,9 @@ class Jekyll::Converters::Markdown::PandocProcessor
     format = config_option("format", DEFAULT_FORMAT)
 
     content = PandocRuby.new(content, *extensions).send("to_#{format}")
-    raise Jekyll::Errors::FatalException, "Conversion returned empty string" unless content.length > 0
+    if content.length == 0
+      raise Jekyll::Errors::FatalException, "Conversion returned empty string"
+    end
     content
   end
 
@@ -27,5 +29,4 @@ class Jekyll::Converters::Markdown::PandocProcessor
       default
     end
   end
-
 end
