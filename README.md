@@ -28,7 +28,7 @@ Add the gem to the Jekyll `_config.yml`:
 
 Change the markdown processor in the Jekyll `_config.yml`:
 
-    markdown: pandoc
+    markdown: PandocProcessor
 
 Additional pandoc options can be provided in the Jekyll `_config.yml`:
 
