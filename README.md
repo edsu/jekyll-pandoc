@@ -39,6 +39,20 @@ Additional pandoc options can be provided in the Jekyll `_config.yml`:
         - csl: _styles/apa.csl
         - bibliography: bibliography/references.bib
 
+These list items in `extensions` are basically turned into command line
+arguments for pandoc. So if you want you can do fancy things like pass 
+in default metadata to link citations and change the title of the 
+references section in the generated HTML:
+
+    pandoc:
+      extensions:
+        - smart
+        - mathjax
+        - csl: _styles/apa.csl
+        - bibliography: bibliography/references.bib
+        - metadata link-citations:true
+        - metadata reference-section-title:Citations
+
 ## Contributing
 
 1. Fork it
